@@ -50,13 +50,13 @@ class JSXTransformTest < ActionDispatch::IntegrationTest
     # as some version inserts an extra "\n" at the beginning.
     # Because appraisal is used, multiple versions of coffee-script are treated
     # together. Remove all spaces to make test pass.
-    assert_equal EXPECTED_JS_2.gsub(/\s/, ''), @response.body.gsub(/\s/, '')
+    assert_equal (EXPECTED_JS + EXPECTED_JS_2).gsub(/\s/, ''), @response.body.gsub(/\s/, '')
   end
 
   test 'use a custom transformer' do
     React::JSX.transformer_class = NullTransformer
-    manually_expire_asset('example2.js')
-    get '/assets/example2.js'
+    manually_expire_asset('example.js')
+    get '/assets/example.js'
     assert_equal "TRANSFORMED CODE!;\n", @response.body
   end
 

@@ -3,5 +3,5 @@
 source "http://rubygems.org"
 
 gem "rails", "~> 4.2.1"
-
+gem "sprockets", "~> 3.5"
 gemspec :path => "../"
