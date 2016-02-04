@@ -51,8 +51,6 @@ module React
 
       def react_component_props(component_name, props)
         content_tag(:noindex, content_tag('script', "window.ReactComponentsProps[\"#{component_name}\"] = #{props};", {}, false))
-
-        content_tag(html_tag, '', html_options, &block)
       end
 
       private
