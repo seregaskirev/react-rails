@@ -22,9 +22,10 @@ module React
       # Render a UJS-type HTML tag annotated with data attributes, which
       # are used by react_ujs to actually instantiate the React component
       # on the client.
-      def react_component(name, props = {}, options = {}, &block)
+      def react_component(name, props = {}, window_props = {}, options = {}, &block)
         options = {:tag => options} if options.is_a?(Symbol)
         props = camelize_props_key(props) if camelize_props_switch
+        window_props = camelize_props_key(window_props) if camelize_props_switch
 
         prerender_options = options[:prerender]
         if prerender_options
@@ -45,7 +46,7 @@ module React
                       else
                         content_tag(html_tag, '', html_options, &block)
                       end
-        output_html += react_component_props(name, props)
+        output_html += react_component_props(name, window_props)
         output_html
       end
 
